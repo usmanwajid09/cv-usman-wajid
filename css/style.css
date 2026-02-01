@@ -1,0 +1,148 @@
+/* ================= VARIABLES ================= */
+:root {
+    --bg: #f5f7fa;
+    --text: #1f2933;
+    --card: #ffffff;
+    --primary: #0f172a;
+}
+
+/* ================= RESET ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* ================= DARK MODE ================= */
+#theme-toggle {
+    display: none;
+}
+
+#theme-toggle:checked~.page {
+    --bg: #0f172a;
+    --text: #e5e7eb;
+    --card: #1e293b;
+    --primary: #e5e7eb;
+}
+
+/* ================= BODY ================= */
+body {
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+/* ================= TOGGLE BUTTON ================= */
+.theme-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--primary);
+    color: var(--bg);
+    padding: 10px 14px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    z-index: 1000;
+}
+
+/* ================= HEADER ================= */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px;
+    background: var(--primary);
+    color: var(--bg);
+    flex-wrap: wrap;
+}
+
+.profile-pic {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* ================= SECTIONS ================= */
+.section {
+    max-width: 950px;
+    margin: auto;
+    padding: 40px;
+}
+
+.section h2 {
+    margin-bottom: 20px;
+    color: var(--primary);
+}
+
+/* ================= CARDS ================= */
+.card {
+    background: var(--card);
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* ================= SKILLS ================= */
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+.skills li {
+    background: var(--primary);
+    color: var(--bg);
+    padding: 8px 14px;
+    margin: 6px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+/* ================= LIST ================= */
+.list {
+    padding-left: 20px;
+}
+
+.list li {
+    margin-bottom: 10px;
+}
+
+/* ================= DOWNLOAD BUTTON ================= */
+.download-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 22px;
+    background: var(--primary);
+    color: var(--bg);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: 0.3s ease;
+}
+
+.download-btn:hover {
+    opacity: 0.85;
+}
+
+/* ================= FOOTER ================= */
+.footer {
+    background: var(--primary);
+    color: var(--bg);
+    text-align: center;
+    padding: 20px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-pic {
+        margin-top: 20px;
+    }
+}
