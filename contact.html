@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Usman Wajid</title>
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome for Social Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .contact-header {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .contact-header h1 {
+            font-size: 2.5rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Dark / Light Toggle -->
+    <input type="checkbox" id="theme-toggle">
+    <label for="theme-toggle" class="theme-btn">🌙</label>
+
+    <!-- NAVIGATION -->
+    <nav class="nav-bar">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="contact.html" class="nav-link active">Contact</a>
+    </nav>
+
+    <div class="page">
+
+        <!-- HEADER -->
+        <header class="header contact-header">
+            <div class="header-text" style="width: 100%; text-align: center;">
+                <h1>I'd love to hear from you!</h1>
+                <p>Have a project in mind or just want to chat? Reach out.</p>
+            </div>
+        </header>
+
+        <section class="section">
+
+            <div class="contact-grid">
+                <!-- Left Column: Contact Info Cards -->
+                <div>
+                    <!-- Email Card -->
+                    <div class="card contact-card">
+                        <h3>EMAIL ME</h3>
+                        <p style="font-size: 1.2rem; font-weight: bold; margin-top: 10px;">
+                            hello@usmanwajid.com
+                        </p>
+                    </div>
+
+                    <!-- Socials Card -->
+                    <div class="card contact-card">
+                        <h3>FIND ME</h3>
+                        <div class="contact-socials">
+                            <a href="#" class="social-circle"><i class="fab fa-github"></i></a>
+                            <a href="#" class="social-circle"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-circle"><i class="fab fa-x-twitter"></i></a>
+                            <a href="#" class="social-circle"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Section -->
+                    <h2 style="margin-top: 30px; font-size: 1.5rem;">Questions & Answers</h2>
+
+                    <details class="faq-details">
+                        <summary class="faq-summary">What services do you offer?</summary>
+                        <div class="faq-content">
+                            I specialize in Full-Stack Web Development, Data Structures & Algorithms solutions, and C++
+                            Systems programming. I can help build responsive websites or optimize complex backend logic.
+                        </div>
+                    </details>
+
+                    <details class="faq-details">
+                        <summary class="faq-summary">Are you available for freelance?</summary>
+                        <div class="faq-content">
+                            Yes, I am currently open to freelance opportunities and internships.
+                        </div>
+                    </details>
+
+                    <details class="faq-details">
+                        <summary class="faq-summary">What tech stack do you use?</summary>
+                        <div class="faq-content">
+                            My primary stack includes React, Node.js, and C++. I'm also proficient with Python, SQL, and
+                            8086 Assembly.
+                        </div>
+                    </details>
+
+                </div>
+
+                <!-- Right Column: Form -->
+                <!-- Note: Form does not stay functional without a backend, added placeholder action -->
+                <div class="card" style="padding: 40px;">
+                    <form class="contact-form" action="#" method="POST">
+                        <label>Name <span style="color:red">*</span></label>
+                        <input type="text" placeholder="Your Name" required>
+
+                        <label>Email Address <span style="color:red">*</span></label>
+                        <input type="email" placeholder="email@example.com" required>
+
+                        <label>Your Budget (Optional)</label>
+                        <select>
+                            <option>Select...</option>
+                            <option>Less than $500</option>
+                            <option>$500 - $1000</option>
+                            <option>$1000 - $5000</option>
+                            <option>More than $5000</option>
+                        </select>
+
+                        <label>Description</label>
+                        <textarea rows="5" placeholder="Tell me about your project..."></textarea>
+
+                        <button type="submit" class="download-btn" style="width: 100%; border-radius: 8px;">Submit
+                            Message</button>
+                    </form>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            © 2026 Usman Wajid | All Rights Reserved
+        </footer>
+
+    </div>
+</body>
+
+</html>
