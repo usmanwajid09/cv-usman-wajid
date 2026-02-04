@@ -40,7 +40,7 @@
     <div class="page">
 
         <!-- HEADER -->
-        <header class="header contact-header">
+        <header class="header contact-header reveal">
             <div class="header-text" style="width: 100%; text-align: center;">
                 <h1>I'd love to hear from you!</h1>
                 <p>Have a project in mind or just want to chat? Reach out.</p>
@@ -53,7 +53,7 @@
                 <!-- Left Column: Contact Info Cards -->
                 <div>
                     <!-- Email Card -->
-                    <div class="card contact-card">
+                    <div class="card contact-card reveal">
                         <h3>EMAIL ME</h3>
                         <p style="font-size: 1.2rem; font-weight: bold; margin-top: 10px;">
                             hello@usmanwajid.com
@@ -61,7 +61,7 @@
                     </div>
 
                     <!-- Socials Card -->
-                    <div class="card contact-card">
+                    <div class="card contact-card reveal">
                         <h3>FIND ME</h3>
                         <div class="contact-socials">
                             <a href="https://github.com/usmanwajid09" class="social-circle"><i
@@ -76,9 +76,9 @@
                     </div>
 
                     <!-- FAQ Section -->
-                    <h2 style="margin-top: 30px; font-size: 1.5rem;">Questions & Answers</h2>
+                    <h2 style="margin-top: 30px; font-size: 1.5rem;" class="reveal">Questions & Answers</h2>
 
-                    <details class="faq-details">
+                    <details class="faq-details reveal">
                         <summary class="faq-summary">What services do you offer?</summary>
                         <div class="faq-content">
                             I specialize in Full-Stack Web Development, Data Structures & Algorithms solutions, and C++
@@ -86,14 +86,14 @@
                         </div>
                     </details>
 
-                    <details class="faq-details">
+                    <details class="faq-details reveal">
                         <summary class="faq-summary">Are you available for freelance?</summary>
                         <div class="faq-content">
                             Yes, I am currently open to freelance opportunities and internships.
                         </div>
                     </details>
 
-                    <details class="faq-details">
+                    <details class="faq-details reveal">
                         <summary class="faq-summary">What tech stack do you use?</summary>
                         <div class="faq-content">
                             My primary stack includes React, Node.js, and C++. I'm also proficient with Python, SQL, and
@@ -105,7 +105,7 @@
 
                 <!-- Right Column: Form -->
                 <!-- Note: Form does not stay functional without a backend, added placeholder action -->
-                <div class="card" style="padding: 40px;">
+                <div class="card reveal" style="padding: 40px;">
                     <form class="contact-form" action="#" method="POST">
                         <label>Name <span style="color:red">*</span></label>
                         <input type="text" placeholder="Your Name" required>
@@ -135,11 +135,12 @@
         </section>
 
         <!-- FOOTER -->
-        <footer class="footer">
+        <footer class="footer reveal">
             © 2026 Usman Wajid | All Rights Reserved
         </footer>
 
     </div>
+    <script src="js/animations.js"></script>
 </body>
 
 </html>

@@ -45,6 +45,30 @@ body:has(#theme-toggle:checked) {
     transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
 }
 
+/* ================= ANIMATIONS ================= */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* ================= BODY ================= */
 body {
     background: var(--bg);
