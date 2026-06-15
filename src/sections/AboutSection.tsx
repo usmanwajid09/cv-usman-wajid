@@ -105,8 +105,8 @@ export const AboutSection: React.FC = () => {
           <FadeIn delay={0.25} y={20} className="flex flex-col sm:flex-row items-center gap-4">
             <ContactButton onClick={handleContactClick} />
             <a
-              href="/Usman_Wajid_CV.pdf"
-              download="Usman_Wajid_CV.pdf"
+              href="/Usman_wajid.pdf"
+              download="Usman_wajid.pdf"
               className="px-8 py-3.5 rounded-full border-2 border-[#D7E2EA]/20 text-[#D7E2EA] font-semibold uppercase tracking-widest text-xs sm:text-sm bg-[#D7E2EA]/5 hover:bg-[#D7E2EA] hover:text-[#0C0C0C] transition-all duration-300 transform hover:scale-[1.03]"
             >
               Download CV

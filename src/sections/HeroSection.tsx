@@ -33,8 +33,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenMenu }) => {
           {/* Actions: Download CV + Menu */}
           <div className="flex items-center gap-3">
             <a
-              href="/Usman_Wajid_CV.pdf"
-              download="Usman_Wajid_CV.pdf"
+              href="/Usman_wajid.pdf"
+              download="Usman_wajid.pdf"
               className="text-[#D7E2EA] hover:bg-[#D7E2EA] hover:text-[#0C0C0C] font-semibold text-xs sm:text-sm uppercase tracking-wider px-4 py-2.5 rounded-full border border-[#D7E2EA]/20 bg-[#D7E2EA]/5 transition-all duration-300 shadow-md"
             >
               Download CV
