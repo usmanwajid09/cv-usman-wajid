@@ -14,6 +14,7 @@ const menuItems = [
   { label: "Home", target: "home" },
   { label: "About", target: "about" },
   { label: "Services", target: "services" },
+  { label: "Experience", target: "experience" },
   { label: "Featured Work", target: "projects" },
   { label: "All Projects", target: "all-projects" },
   { label: "Contact", target: "contact" },
