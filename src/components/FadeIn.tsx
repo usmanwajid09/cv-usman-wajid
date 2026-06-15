@@ -22,9 +22,11 @@ export const FadeIn: React.FC<FadeInProps> = ({
 }) => {
   // dynamic motion component using motion.create
   // fall back to motion[as] if motion.create doesn't exist just in case
-  const MotionComponent = typeof (motion as any).create === "function"
-    ? (motion as any).create(as)
-    : (motion as any)[as] || motion.div;
+  const MotionComponent = React.useMemo(() => {
+    return typeof (motion as any).create === "function"
+      ? (motion as any).create(as)
+      : (motion as any)[as] || motion.div;
+  }, [as]);
 
   return (
     <MotionComponent
