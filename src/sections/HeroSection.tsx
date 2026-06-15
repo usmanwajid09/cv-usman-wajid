@@ -74,7 +74,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenMenu }) => {
         {/* Left text */}
         <FadeIn delay={0.35} y={20} as="div" className="max-w-[200px] sm:max-w-[300px] md:max-w-[400px] lg:max-w-[480px]">
           <p className="text-[#D7E2EA] font-light uppercase tracking-wide leading-snug text-[0.75rem] sm:text-[0.85rem] md:text-[0.95rem] lg:text-[1.1rem]">
-            specializing in low-level system architecture and modern full-stack development to build high-performance software
+            specializing in machine learning models and modern full-stack development to build intelligent, high-performance software
           </p>
         </FadeIn>
 
