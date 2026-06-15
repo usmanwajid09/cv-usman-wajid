@@ -7,8 +7,7 @@ import {
   FileText, 
   Award, 
   ShieldCheck, 
-  Sparkles,
-  ChevronRight
+  Sparkles
 } from "lucide-react";
 import { FadeIn } from "../components/FadeIn";
 
@@ -25,13 +24,12 @@ interface ExperienceItem {
   type: "Internship" | "Part-time" | "Seasonal" | "Full-time";
   duration: string;
   location: string;
-  categories: ("ml" | "web" | "leadership")[];
   details: string[];
   skills: string[];
   docs?: DocLink[];
   gradient: string; // for the letter logo
-  glowColor: string; // Tailwind glow class (e.g. shadow-purple-500/10)
-  accentColor: string; // CSS color string for SVG icons, timeline dots
+  glowColor: string; // Tailwind glow class
+  accentColor: string; // CSS color string for SVG icons
   avatarChar: string;
 }
 
@@ -43,7 +41,6 @@ const experiencesData: ExperienceItem[] = [
     type: "Internship",
     duration: "Jun 2026 - Present · 1 mo",
     location: "New York, United States (Remote)",
-    categories: ["ml", "web"],
     details: [
       "Developing and optimizing state-of-the-art machine learning models for production scale applications.",
       "Researching and implementing advanced Generative AI architectures and fine-tuning Custom NLP pipelines.",
@@ -70,7 +67,6 @@ const experiencesData: ExperienceItem[] = [
     type: "Part-time",
     duration: "Feb 2026 - Present · 5 mos",
     location: "Lahore, Punjab, Pakistan (Remote)",
-    categories: ["web", "leadership"],
     details: [
       "**Founding Strategy**: Spearheading NovaStack's vision to provide high-quality IT consulting, scalable software architecture, and custom web services.",
       "**Product Engineering**: Leading full-stack development of secure, highly performant web applications using React, Node.js, and relational/non-relational databases.",
@@ -90,7 +86,6 @@ const experiencesData: ExperienceItem[] = [
     type: "Internship",
     duration: "Jun 2026 - Present · 1 mo",
     location: "Lahore, Punjab, Pakistan (Remote)",
-    categories: ["ml"],
     details: [
       "Assisting in building machine learning pipelines under the mentorship of the Head of AI.",
       "Designing and implementing Convolutional Neural Networks (CNNs) for image classification and feature extraction.",
@@ -117,7 +112,6 @@ const experiencesData: ExperienceItem[] = [
     type: "Internship",
     duration: "Jun 2026 - Present · 1 mo",
     location: "Pakistan (Remote)",
-    categories: ["ml"],
     details: [
       "Successfully built and evaluated four foundational Machine Learning projects spanning core classification, regression, imbalanced learning, and NLP tasks.",
       "**Titanic Survival Prediction**: Engineered survival features (e.g., family size) and trained Random Forest classifiers achieving 82.2% CV accuracy.",
@@ -150,7 +144,6 @@ const experiencesData: ExperienceItem[] = [
     type: "Internship",
     duration: "May 2026 - Jun 2026 · 2 mos",
     location: "India (Remote)",
-    categories: ["ml"],
     details: [
       "Completed a structured 2-month AI development track focused on algorithm development and neural networks.",
       "**Rule-Based AI Chatbot**: Programmed a chatbot in Python utilizing string manipulation, tokenization, and pattern matching.",
@@ -183,7 +176,6 @@ const experiencesData: ExperienceItem[] = [
     type: "Seasonal",
     duration: "Aug 2024 - Feb 2026 · 1 yr 7 mos",
     location: "Lahore, Punjab, Pakistan (On-site)",
-    categories: ["leadership"],
     details: [
       "**Event Orchestration**: Successfully organized a nationwide cinematography competition in collaboration with SOFTEC, raising active community engagement.",
       "**Budgeting & Sponsorship**: Managed funding, awarding 20,000 PKR to the first place winner and 10,000 PKR to the runner-up to incentivize local talent.",
@@ -198,11 +190,9 @@ const experiencesData: ExperienceItem[] = [
 ];
 
 export const ExperienceSection: React.FC = () => {
-  const [filter, setFilter] = useState<"all" | "ml" | "web" | "leadership">("all");
+  const [activeId, setActiveId] = useState<string>("01");
 
-  const filteredExperiences = experiencesData.filter(
-    (exp) => filter === "all" || exp.categories.includes(filter)
-  );
+  const activeExp = experiencesData.find((exp) => exp.id === activeId) || experiencesData[0];
 
   const getDocIcon = (type: "letter" | "certificate" | "report") => {
     switch (type) {
@@ -220,9 +210,9 @@ export const ExperienceSection: React.FC = () => {
       id="experience"
       className="relative min-h-screen bg-[#0C0C0C] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-10 sm:-mt-12 md:-mt-14 pt-28 pb-24 px-5 sm:px-8 md:px-10 z-10 overflow-hidden"
     >
-      {/* Visual background ambient aura */}
-      <div className="absolute top-[20%] left-[-10%] w-[35vw] h-[35vw] bg-[#B600A8]/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[20%] right-[-10%] w-[35vw] h-[35vw] bg-blue-500/5 rounded-full blur-[120px] pointer-events-none" />
+      {/* Ambient backgrounds */}
+      <div className="absolute top-[30%] left-[-15%] w-[40vw] h-[40vw] bg-[#B600A8]/5 rounded-full blur-[130px] pointer-events-none" />
+      <div className="absolute bottom-[20%] right-[-15%] w-[40vw] h-[40vw] bg-blue-500/5 rounded-full blur-[130px] pointer-events-none" />
 
       <div className="w-full max-w-6xl mx-auto">
         
@@ -232,185 +222,179 @@ export const ExperienceSection: React.FC = () => {
             Experience
           </h2>
           <p className="text-[#D7E2EA]/50 font-light text-sm sm:text-base uppercase tracking-widest mt-4">
-            A chronological timeline of my internships and leadership
+            Interactive Dashboard -- Click a company to inspect work details
           </p>
         </FadeIn>
 
-        {/* Layout Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-14">
+        {/* Dashboard layout */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-start">
           
-          {/* Left Column - Sticky Filter Controller */}
-          <div className="lg:col-span-4 lg:sticky lg:top-28 h-fit z-20 flex flex-col gap-8">
-            <div className="bg-[#121212]/50 border border-[#D7E2EA]/10 rounded-[30px] p-6 md:p-8 backdrop-blur-md">
-              <h3 className="text-[#D7E2EA] font-semibold text-lg sm:text-xl uppercase tracking-wider mb-4 flex items-center">
-                <Sparkles className="w-5 h-5 text-[#B600A8] mr-2" />
-                Filter Path
-              </h3>
-              <p className="text-[#D7E2EA]/60 text-xs sm:text-sm leading-relaxed mb-6 font-light">
-                Toggle categories to filter my timeline based on specific domain expertise and career achievements.
-              </p>
+          {/* Left Side: Tab selection panel */}
+          <div className="md:col-span-4 flex flex-row md:flex-col overflow-x-auto md:overflow-x-visible pb-4 md:pb-0 gap-3 md:gap-4 border-b border-[#D7E2EA]/10 md:border-b-0 scrollbar-none snap-x select-none">
+            {experiencesData.map((exp) => {
+              const isActive = exp.id === activeId;
+              return (
+                <button
+                  key={exp.id}
+                  onClick={() => setActiveId(exp.id)}
+                  className={`snap-center shrink-0 w-[240px] md:w-full text-left p-5 rounded-[24px] border transition-all duration-300 relative group overflow-hidden ${
+                    isActive
+                      ? "bg-[#121212] border-white/10"
+                      : "bg-[#121212]/30 border-white/5 hover:bg-[#121212]/50 hover:border-white/10"
+                  }`}
+                  style={{
+                    boxShadow: isActive ? `0 4px 25px ${exp.accentColor}08` : "none"
+                  }}
+                >
+                  {/* Active Indicator Bar */}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeTabIndicator"
+                      className="absolute left-0 top-0 bottom-0 w-[4px] bg-gradient-to-b from-[#B600A8] to-[#00F0FF] rounded-r-full"
+                    />
+                  )}
 
-              {/* Filter Buttons */}
-              <div className="flex flex-col gap-3">
-                {[
-                  { id: "all", label: "All Journeys" },
-                  { id: "ml", label: "Machine Learning & AI" },
-                  { id: "web", label: "Web Dev & Core SE" },
-                  { id: "leadership", label: "Leadership & Society" }
-                ].map((tab) => {
-                  const isActive = filter === tab.id;
-                  return (
-                    <button
-                      key={tab.id}
-                      onClick={() => setFilter(tab.id as any)}
-                      className={`relative w-full text-left px-5 py-3 rounded-full text-xs sm:text-sm font-semibold uppercase tracking-widest transition-all duration-300 ${
-                        isActive
-                          ? "bg-[#D7E2EA] text-[#0C0C0C] shadow-lg scale-[1.02]"
-                          : "bg-[#D7E2EA]/5 text-[#D7E2EA]/60 border border-[#D7E2EA]/10 hover:bg-[#D7E2EA]/10 hover:text-[#D7E2EA] hover:border-[#D7E2EA]/20"
-                      }`}
-                    >
-                      {tab.label}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Resume Callout Widget */}
-            <div className="hidden lg:flex bg-[#B600A8]/5 border border-[#B600A8]/20 rounded-[30px] p-6 backdrop-blur-md flex-col gap-3">
-              <h4 className="text-[#D7E2EA] font-semibold text-sm uppercase tracking-wider">Looking for a PDF copy?</h4>
-              <p className="text-[#D7E2EA]/60 text-xs leading-relaxed font-light">
-                Download my complete resume for a printer-friendly version of these credentials.
-              </p>
-              <a
-                href="/Usman_wajid.pdf"
-                download="Usman_wajid.pdf"
-                className="w-fit flex items-center gap-1.5 px-4 py-2 mt-2 rounded-full bg-white/5 border border-white/10 text-[#D7E2EA] text-xs font-bold uppercase tracking-wider hover:bg-white hover:text-black transition-all duration-300"
-              >
-                Download Resume <ChevronRight className="w-3.5 h-3.5" />
-              </a>
-            </div>
+                  <div className="flex items-center gap-4">
+                    <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${exp.gradient} flex items-center justify-center font-black text-white text-base shadow-sm group-hover:scale-105 transition-transform shrink-0`}>
+                      {exp.avatarChar}
+                    </div>
+                    <div className="overflow-hidden">
+                      <h3 className={`font-bold text-sm tracking-wide transition-colors ${isActive ? "text-white" : "text-[#D7E2EA]/70 group-hover:text-white"}`}>
+                        {exp.company}
+                      </h3>
+                      <p className="text-[11px] text-[#D7E2EA]/45 font-medium truncate mt-0.5 uppercase tracking-wider">
+                        {exp.role}
+                      </p>
+                      <p className="text-[10px] text-[#D7E2EA]/35 font-light mt-0.5">
+                        {exp.duration.split("·")[0].trim()}
+                      </p>
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
           </div>
 
-          {/* Right Column - Timeline Cards */}
-          <div className="lg:col-span-8 relative">
-            
-            {/* Timeline Line */}
-            <div className="absolute left-6 sm:left-10 top-2 bottom-2 w-[2px] bg-gradient-to-b from-[#B600A8]/30 via-[#00F0FF]/30 to-[#D7E2EA]/5 pointer-events-none" />
+          {/* Right Side: Tab details panel with custom Framer Motion animations */}
+          <div className="md:col-span-8 min-h-[480px]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeExp.id}
+                initial={{ opacity: 0, x: 20, y: 5 }}
+                animate={{ opacity: 1, x: 0, y: 0 }}
+                exit={{ opacity: 0, x: -20, y: -5 }}
+                transition={{ duration: 0.35, ease: "easeOut" }}
+                className={`w-full rounded-[35px] border border-[#D7E2EA]/10 bg-[#121212]/40 p-6 sm:p-8 md:p-10 backdrop-blur-md shadow-2xl relative transition-all duration-500 ${activeExp.glowColor}`}
+              >
+                
+                {/* Header Section */}
+                <div className="flex flex-col sm:flex-row items-start justify-between gap-4 border-b border-[#D7E2EA]/10 pb-6 mb-6">
+                  <div>
+                    <h3 className="text-white font-extrabold text-xl sm:text-2xl lg:text-3xl tracking-wide flex flex-wrap items-center gap-3">
+                      {activeExp.role}
+                    </h3>
+                    <div className="flex flex-wrap items-center gap-2 mt-2">
+                      <span className="text-[#D7E2EA] font-semibold text-base sm:text-lg">
+                        {activeExp.company}
+                      </span>
+                      <span className="text-[10px] sm:text-xs font-light text-[#D7E2EA]/50 uppercase tracking-widest px-2.5 py-0.5 border border-[#D7E2EA]/10 rounded-full bg-[#D7E2EA]/5">
+                        {activeExp.type}
+                      </span>
+                    </div>
+                  </div>
 
-            {/* Experience Cards Loop */}
-            <div className="flex flex-col gap-10 md:gap-12">
-              <AnimatePresence mode="popLayout">
-                {filteredExperiences.map((exp) => {
-                  return (
-                    <motion.div
-                      key={exp.id}
-                      layout
-                      initial={{ opacity: 0, x: 30 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -30 }}
-                      transition={{ duration: 0.5, ease: "easeOut" }}
-                      className="relative pl-14 sm:pl-20 group"
-                    >
-                      {/* Timeline Node Icon Indicator */}
-                      <div 
-                        className="absolute left-[14px] sm:left-[30px] top-4 w-5 h-5 rounded-full border-4 border-[#0C0C0C] z-10 transition-all duration-300 group-hover:scale-130 shadow-[0_0_10px_rgba(0,0,0,0.5)]"
-                        style={{ 
-                          backgroundColor: exp.accentColor,
-                          boxShadow: `0 0 12px ${exp.accentColor}40`
-                        }}
-                      />
+                  <div className="flex flex-col sm:items-end text-xs sm:text-sm text-[#D7E2EA]/60 font-light shrink-0">
+                    <span className="flex items-center gap-1.5 mb-1.5">
+                      <Calendar className="w-4 h-4" />
+                      {activeExp.duration}
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <MapPin className="w-4 h-4" />
+                      {activeExp.location}
+                    </span>
+                  </div>
+                </div>
 
-                      {/* Glassmorphic Experience Card */}
-                      <div className={`w-full rounded-[35px] border border-[#D7E2EA]/10 bg-[#121212]/40 p-6 sm:p-8 backdrop-blur-md shadow-xl transition-all duration-300 group-hover:${exp.glowColor} group-hover:bg-[#121212]/60`}>
-                        
-                        {/* Header Details */}
-                        <div className="flex flex-col sm:flex-row items-start justify-between gap-4 border-b border-[#D7E2EA]/10 pb-5 mb-5">
-                          
-                          {/* Company Letter Logo & Title */}
-                          <div className="flex items-center gap-4">
-                            <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${exp.gradient} flex items-center justify-center font-black text-xl text-white shadow-lg`}>
-                              {exp.avatarChar}
-                            </div>
-                            <div>
-                              <h3 className="text-[#D7E2EA] font-semibold text-lg sm:text-xl tracking-wide group-hover:text-white transition-colors">
-                                {exp.role}
-                              </h3>
-                              <p className="text-[#D7E2EA]/85 text-sm sm:text-base font-medium">
-                                {exp.company} <span className="text-xs font-light text-[#D7E2EA]/50 ml-1.5 uppercase tracking-widest px-2 py-0.5 border border-[#D7E2EA]/10 rounded-full bg-[#D7E2EA]/5">{exp.type}</span>
-                              </p>
-                            </div>
-                          </div>
+                {/* Bullets List */}
+                <div className="mb-8">
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-[#D7E2EA]/40 mb-4 flex items-center">
+                    <Sparkles className="w-4 h-4 text-[#B600A8] mr-1.5" />
+                    Key Accomplishments
+                  </h4>
+                  <ul className="flex flex-col gap-4">
+                    {activeExp.details.map((detail, dIdx) => (
+                      <li 
+                        key={dIdx} 
+                        className="text-sm sm:text-base text-[#D7E2EA]/85 leading-relaxed font-light pl-6 relative"
+                      >
+                        {/* Custom glowing bullet node */}
+                        <span 
+                          className="absolute left-0 top-[9px] w-2 h-2 rounded-full"
+                          style={{ backgroundColor: activeExp.accentColor }}
+                        />
+                        <span dangerouslySetInnerHTML={{ __html: detail }} />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
 
-                          {/* Date & Location */}
-                          <div className="flex flex-col sm:items-end text-xs sm:text-sm text-[#D7E2EA]/60 font-light">
-                            <span className="flex items-center gap-1 mb-1">
-                              <Calendar className="w-3.5 h-3.5" />
-                              {exp.duration}
-                            </span>
-                            <span className="flex items-center gap-1">
-                              <MapPin className="w-3.5 h-3.5" />
-                              {exp.location}
-                            </span>
-                          </div>
+                {/* Tech Badges */}
+                <div className="mb-8">
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-[#D7E2EA]/40 mb-3">
+                    Technologies &amp; Skills
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {activeExp.skills.map((skill, sIdx) => (
+                      <span 
+                        key={sIdx} 
+                        className="text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full border border-white/5 bg-white/5 text-[#D7E2EA]/85 hover:border-white/10 hover:text-white hover:bg-white/10 transition-all cursor-default"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
 
-                        </div>
+                {/* Credentials */}
+                {activeExp.docs && activeExp.docs.length > 0 && (
+                  <div className="border-t border-[#D7E2EA]/10 pt-6">
+                    <h4 className="text-xs font-bold uppercase tracking-widest text-[#D7E2EA]/40 mb-3.5">
+                      Verified Credentials
+                    </h4>
+                    <div className="flex flex-wrap gap-3">
+                      {activeExp.docs.map((doc, dIdx) => (
+                        <a
+                          key={dIdx}
+                          href={doc.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center text-xs text-[#D7E2EA]/70 hover:text-white font-semibold bg-[#D7E2EA]/5 hover:bg-[#D7E2EA]/15 border border-[#D7E2EA]/10 px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-[1.03]"
+                        >
+                          {getDocIcon(doc.type)}
+                          {doc.label}
+                          <ExternalLink className="w-3.5 h-3.5 ml-1.5 opacity-60" />
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
-                        {/* Bullet Details */}
-                        <ul className="flex flex-col gap-3 mb-6">
-                          {exp.details.map((detail, dIdx) => (
-                            <li 
-                              key={dIdx} 
-                              className="text-xs sm:text-sm text-[#D7E2EA]/75 leading-relaxed font-light"
-                              dangerouslySetInnerHTML={{ __html: detail }}
-                            />
-                          ))}
-                        </ul>
-
-                        {/* Skills pill list */}
-                        <div className="flex flex-wrap gap-2 mb-6">
-                          {exp.skills.map((skill, sIdx) => (
-                            <span 
-                              key={sIdx} 
-                              className="text-[10px] sm:text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-white/5 bg-white/5 text-[#D7E2EA]/80 group-hover:border-white/10 group-hover:text-white group-hover:bg-white/10 transition-all"
-                            >
-                              {skill}
-                            </span>
-                          ))}
-                        </div>
-
-                        {/* Verified Documents Links */}
-                        {exp.docs && exp.docs.length > 0 && (
-                          <div className="border-t border-[#D7E2EA]/10 pt-4 flex flex-wrap gap-3">
-                            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#D7E2EA]/40 w-full mb-1">
-                              Verified Documents:
-                            </span>
-                            {exp.docs.map((doc, dIdx) => (
-                              <a
-                                key={dIdx}
-                                href={doc.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center text-xs text-[#D7E2EA]/70 hover:text-white font-medium bg-[#D7E2EA]/5 hover:bg-[#D7E2EA]/15 border border-[#D7E2EA]/10 px-3.5 py-1.5 rounded-full transition-all duration-300 transform hover:scale-[1.03]"
-                              >
-                                {getDocIcon(doc.type)}
-                                {doc.label}
-                                <ExternalLink className="w-3 h-3 ml-1.5 opacity-60" />
-                              </a>
-                            ))}
-                          </div>
-                        )}
-
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </AnimatePresence>
-            </div>
-
+              </motion.div>
+            </AnimatePresence>
           </div>
 
         </div>
+
+        {/* Floating Download CV Callout for smaller screens */}
+        <FadeIn delay={0.2} y={20} className="mt-14 flex md:hidden justify-center w-full">
+          <a
+            href="/Usman_wajid.pdf"
+            download="Usman_wajid.pdf"
+            className="w-full text-center py-4 rounded-full border border-[#D7E2EA]/20 text-[#D7E2EA] font-semibold uppercase tracking-widest text-xs bg-[#D7E2EA]/5"
+          >
+            Download Full Resume
+          </a>
+        </FadeIn>
 
       </div>
     </section>
