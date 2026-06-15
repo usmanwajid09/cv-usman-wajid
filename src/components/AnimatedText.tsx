@@ -15,20 +15,44 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({ text, className = ""
     offset: ["start 0.8", "end 0.2"],
   });
 
-  const chars = text.split("");
-  const totalChars = chars.length;
+  const words = text.split(" ");
+  const totalChars = text.length;
+
+  let globalCharIndex = 0;
 
   return (
     <span ref={containerRef} className={`${className} inline-block`}>
-      {chars.map((char, index) => {
-        // Calculate the range of scroll progress where this character reveals
-        const start = index / totalChars;
-        const end = Math.min(1, (index + 1) / totalChars);
-        return (
-          <Character key={index} progress={scrollYProgress} range={[start, end]}>
-            {char}
-          </Character>
+      {words.map((word, wordIndex) => {
+        const wordChars = word.split("");
+        const wordElement = (
+          <span key={wordIndex} className="inline-block whitespace-nowrap">
+            {wordChars.map((char, charIndex) => {
+              const charIdx = globalCharIndex++;
+              const start = charIdx / totalChars;
+              const end = Math.min(1, (charIdx + 1) / totalChars);
+              return (
+                <Character key={charIndex} progress={scrollYProgress} range={[start, end]}>
+                  {char}
+                </Character>
+              );
+            })}
+            {wordIndex < words.length - 1 && (
+              <Character 
+                key={`space-${wordIndex}`} 
+                progress={scrollYProgress} 
+                range={[globalCharIndex / totalChars, Math.min(1, (globalCharIndex + 1) / totalChars)]}
+              >
+                {" "}
+              </Character>
+            )}
+          </span>
         );
+
+        if (wordIndex < words.length - 1) {
+          globalCharIndex++; // increment for space character
+        }
+
+        return wordElement;
       })}
     </span>
   );
