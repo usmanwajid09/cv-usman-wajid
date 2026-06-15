@@ -11,7 +11,7 @@ export const AboutSection: React.FC = () => {
     }
   };
 
-  const bioText = "I'm Usman Wajid, a developer focused on building efficient and complex systems. My expertise spans low-level code in Assembly and C++ to modern web stacks using React, Node.js, and AI Integration. My goal is to deliver robust solutions that are technically sound and logically driven. Let's build something incredible together!";
+  const bioText = "I'm Usman Wajid, a software engineer dedicated to building high-performance digital products. I specialize in designing responsive web platforms (MERN stack), launching smooth cross-platform mobile apps (Flutter), and training custom machine learning models to solve real-world problems. I bridge the gap between complex low-level code and simple, impactful user experiences. Let's build something incredible together!";
 
   return (
     <section
