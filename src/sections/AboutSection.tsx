@@ -2,6 +2,7 @@ import { ContactButton } from "../components/ContactButton";
 import { FadeIn } from "../components/FadeIn";
 import { AnimatedText } from "../components/AnimatedText";
 import { MovingSkills } from "../components/MovingSkills";
+import { GraduationCap, Trophy } from "lucide-react";
 
 export const AboutSection: React.FC = () => {
   const handleContactClick = () => {
@@ -114,6 +115,103 @@ export const AboutSection: React.FC = () => {
           </FadeIn>
 
         </div>
+
+        {/* Education & Achievements Glassmorphic Grid */}
+        <FadeIn delay={0.3} y={30} className="w-full max-w-4xl mt-16 px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+            
+            {/* Education Card */}
+            <div className="relative group p-6 sm:p-8 rounded-[32px] border border-[#D7E2EA]/10 bg-[#121212]/40 backdrop-blur-md hover:border-[#B600A8]/30 hover:bg-[#121212]/60 transition-all duration-500 flex flex-col justify-between overflow-hidden shadow-2xl">
+              {/* Corner ambient glow */}
+              <div className="absolute top-0 right-0 w-24 h-24 bg-[#B600A8]/5 rounded-full filter blur-2xl pointer-events-none group-hover:bg-[#B600A8]/10 transition-colors duration-500" />
+              
+              <div>
+                <div className="flex items-center gap-3.5 mb-6">
+                  <div className="w-10 h-10 rounded-xl bg-[#B600A8]/10 flex items-center justify-center text-[#B600A8] group-hover:scale-110 transition-transform duration-300">
+                    <GraduationCap className="w-5.5 h-5.5" />
+                  </div>
+                  <span className="text-xs font-bold uppercase tracking-widest text-[#B600A8]">Education</span>
+                </div>
+                
+                <h4 className="text-white font-extrabold text-lg sm:text-xl tracking-wide uppercase">
+                  Bachelor of Computer Science
+                </h4>
+                <p className="text-[#D7E2EA]/80 font-bold text-sm mt-1">
+                  FAST-NUCES, Lahore
+                </p>
+                <p className="text-[#D7E2EA]/45 text-[11px] font-semibold uppercase tracking-wider mt-0.5">
+                  Ongoing · 6th Semester
+                </p>
+                
+                <p className="text-[#D7E2EA]/60 font-light text-xs sm:text-sm leading-relaxed mt-4">
+                  Focused heavily on core computer science fundamentals, low-level architecture, deep learning algorithms, and engineering enterprise applications.
+                </p>
+              </div>
+
+              {/* Coursework details */}
+              <div className="mt-6 pt-4 border-t border-[#D7E2EA]/5 flex flex-wrap gap-1.5">
+                {["DSA", "OOP", "Database Systems", "Computer Networks", "Assembly (8086)"].map((course) => (
+                  <span key={course} className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-md bg-[#D7E2EA]/5 text-[#D7E2EA]/50 border border-[#D7E2EA]/5">
+                    {course}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Achievements Card */}
+            <div className="relative group p-6 sm:p-8 rounded-[32px] border border-[#D7E2EA]/10 bg-[#121212]/40 backdrop-blur-md hover:border-[#00F0FF]/30 hover:bg-[#121212]/60 transition-all duration-500 flex flex-col justify-between overflow-hidden shadow-2xl">
+              {/* Corner ambient glow */}
+              <div className="absolute top-0 right-0 w-24 h-24 bg-[#00F0FF]/5 rounded-full filter blur-2xl pointer-events-none group-hover:bg-[#00F0FF]/10 transition-colors duration-500" />
+              
+              <div>
+                <div className="flex items-center gap-3.5 mb-6">
+                  <div className="w-10 h-10 rounded-xl bg-[#00F0FF]/10 flex items-center justify-center text-[#00F0FF] group-hover:scale-110 transition-transform duration-300">
+                    <Trophy className="w-5.5 h-5.5" />
+                  </div>
+                  <span className="text-xs font-bold uppercase tracking-widest text-[#00F0FF]">Key Achievements</span>
+                </div>
+
+                <ul className="flex flex-col gap-4">
+                  <li className="flex items-start gap-3">
+                    <span className="text-sm shrink-0">🏆</span>
+                    <div>
+                      <h5 className="text-xs font-bold uppercase text-white tracking-wide">6th Position - FCPC 2025</h5>
+                      <p className="text-[11px] text-[#D7E2EA]/55 font-light mt-0.5 leading-normal">
+                        Secured national ranking in the FAST Competitive Programming Contest.
+                      </p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-sm shrink-0">💻</span>
+                    <div>
+                      <h5 className="text-xs font-bold uppercase text-white tracking-wide">150+ LeetCode Solved</h5>
+                      <p className="text-[11px] text-[#D7E2EA]/55 font-light mt-0.5 leading-normal">
+                        Active coder solving complex algorithmic challenges (Graphs, DP, Recursion).
+                      </p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-sm shrink-0">✨</span>
+                    <div>
+                      <h5 className="text-xs font-bold uppercase text-white tracking-wide">Deputy Head - SOFTEC 2025</h5>
+                      <p className="text-[11px] text-[#D7E2EA]/55 font-light mt-0.5 leading-normal">
+                        Led photography/cinematography logistics for a major IT event.
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Extra note */}
+              <div className="mt-6 pt-4 border-t border-[#D7E2EA]/5">
+                <p className="text-[10px] text-[#D7E2EA]/40 font-light italic">
+                  * Attended various GDSC (Google Developer Student Club) workshops on cloud & web platforms.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </FadeIn>
 
         {/* Continuous Moving Skill Marquees */}
         <FadeIn delay={0.3} y={40} className="w-full mt-24 sm:mt-32 border-t border-[#D7E2EA]/10 pt-16">
